@@ -33,7 +33,14 @@ informacao_valida = "\nInformação Valida!"
 
 informacao_invalida = "\nInformação Invalida!"
 
-usuarios_cpf = []
+cpf_errado = "\n CPF errado. Digite novamente!"
+
+sem_cadastro = "\nVocê não tem cadastro"
+
+cadastrar_pergunta = "\nDeseja realizar cadastro?[Sim/Não] "
+
+#listas
+usuarios_cpf = [7572341519]
 
 def cadastrar_usuario():
     pass
@@ -53,26 +60,45 @@ def validador_cpf(cpf: int) -> bool:
     else:
         return False
 
-def checar_cpf_base(cpf:int, indice:int):
-    pass
+def checar_cpf_base(cpf:int, indice:int) -> any:
+    for checar in range(len(usuarios_cpf)):
+        if cpf == usuarios_cpf[checar] and indice == 0:
+            return True
+        elif cpf == usuarios_cpf[checar] and indice == 0:
+            return checar
+        else:
+            return False
 
-def login_usuario():
+
+def login_usuario() -> any:
     while True:
         print(mensagem_informe)
         cpf_usuario = int(input(indicador_cpf).strip())
         validador_bool_1 = validador_cpf(cpf_usuario)
-        validador_bool_2 = checar_cpf_base(cpf_usuario, 1)
+        validador_bool_2 = checar_cpf_base(cpf_usuario, 0)
 
         if validador_bool_1 and validador_bool_2:
             print(informacao_valida)
-        elif validador_bool_1 == False:
-            print(informacao_invalida + "\n CPF errado. Digite novamente!")
-        elif validador_bool_1 == True and validador_bool_2 == False:
-            
+            return checar_cpf_base(cpf_errado, 1)
+        elif not validador_bool_1:
+            print(informacao_invalida + cpf_errado)
+        elif validador_bool_1 and not validador_bool_2:
+            print(informacao_invalida + sem_cadastro)
+
+            while True:
+                cadastro = input(cadastrar_pergunta).strip().lower()
+                if cadastro[0] == "s":
+                    cadastrar_usuario()
+                    break
+                elif cadastro[0] == "n":
+                    print(mensagem_saida)
+                    exit()
+                else:
+                    print(informacao_invalida)
 
         nome_usuario = input(indicador_nome)
 
-def menu():
+def menu() -> any:
     
     while True:
         print(menu_inicial)
@@ -87,11 +113,9 @@ def menu():
                 cadastrar_usuario()
             case _:
                 print(digite_correto)
-pass
 
 def main() -> None:
-   validador_usuario = menu()
-   pass
+    iniciador = menu()
     
 if __name__ == "__main__":
     while True:
@@ -102,4 +126,3 @@ if __name__ == "__main__":
             break
         except ValueError:
             print(erro_valor)
-    pass
