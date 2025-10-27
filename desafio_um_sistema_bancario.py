@@ -40,7 +40,7 @@ sem_cadastro = "\nVocê não tem cadastro"
 cadastrar_pergunta = "\nDeseja realizar cadastro?[Sim/Não] "
 
 #listas
-usuarios_cpf = [7572341519]
+usuarios_cpf = []
 
 def cadastrar_usuario():
     pass
